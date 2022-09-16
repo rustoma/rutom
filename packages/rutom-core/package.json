@@ -24,7 +24,8 @@
     "test:unit": "jest --watch",
     "test:unit:ci": "jest",
     "test:unit:coverage": "jest --silent --watchAll=false --coverage",
-    "lint": "eslint . --ext .ts,.tsx --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .ts,.tsx --fix --ignore-path .gitignore",
+    "format": "prettier . --write --ignore-path .gitignore && git update-index --again"
   },
   "browserslist": {
     "production": [
@@ -80,6 +81,7 @@
     "jest": "^29.0.3",
     "jest-environment-jsdom": "^29.0.3",
     "jsdom": "^20.0.0",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
