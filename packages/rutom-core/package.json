@@ -2,30 +2,41 @@
   "name": "@rustoma/rutom-core",
   "version": "0.0.1",
   "description": "React headless component library",
+  "keywords": [],
   "license": "MIT",
   "author": "rustoma",
-  "keywords": [],
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "types": "dist/index.d.ts",
-  "main": "./dist/rutom-core.umd.js",
-  "module": "./dist/rutom-core.es.js",
   "exports": {
     ".": {
       "import": "./dist/rutom-core.es.js",
       "require": "./dist/rutom-core.umd.js"
     }
   },
+  "main": "./dist/rutom-core.umd.js",
+  "module": "./dist/rutom-core.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
+    "dev": "vite",
+    "format": "prettier . --write --ignore-path .gitignore && git update-index --again",
+    "lint": "eslint . --ext .ts,.tsx --fix --ignore-path .gitignore",
+    "prepare": "cd ../.. && husky install",
     "test:unit": "jest --watch",
     "test:unit:ci": "jest",
-    "test:unit:coverage": "jest --silent --watchAll=false --coverage",
-    "lint": "eslint . --ext .ts,.tsx --fix --ignore-path .gitignore",
-    "format": "prettier . --write --ignore-path .gitignore && git update-index --again"
+    "test:unit:coverage": "jest --silent --watchAll=false --coverage"
+  },
+  "lint-staged": {
+    "*.{css,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "eslint",
+      "prettier --write"
+    ],
+    "package.json": "npx sort-package-json"
   },
   "browserslist": {
     "production": [
@@ -42,16 +53,16 @@
   "eslintConfig": {
     "env": {
       "browser": true,
-      "node": true,
-      "es2020": true
+      "es2020": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
     },
     "extends": [
       "eslint:recommended",
       "plugin:react/recommended"
-    ],
-    "parserOptions": {
-      "sourceType": "module"
-    }
+    ]
   },
   "devDependencies": {
     "@testing-library/dom": "^8.17.1",
@@ -77,6 +88,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-testing-library": "^5.6.4",
+    "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.0.3",
     "jest-environment-jsdom": "^29.0.3",
